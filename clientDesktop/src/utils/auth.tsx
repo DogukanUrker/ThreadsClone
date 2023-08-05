@@ -1,0 +1,28 @@
+import { useLocation, Navigate } from "react-router-dom";
+
+export const setToken = (token) => {
+  localStorage.setItem("Token", token);
+};
+
+export const setUsername = (user) => {
+  localStorage.setItem("User", JSON.stringify(user));
+};
+
+export const fetchToken = (token) => {
+  return localStorage.getItem("Token");
+};
+
+export const fetchUsername = (user) => {
+  return localStorage.getItem("User");
+};
+
+export function RequireToken({ children }) {
+  let auth = fetchToken();
+  let location = useLocation();
+
+  if (!auth) {
+    return <Navigate to="/" state={{ from: location }} />;
+  }
+
+  return children;
+}
