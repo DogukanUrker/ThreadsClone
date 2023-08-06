@@ -16,10 +16,13 @@ export default function Signup() {
     } else {
       axios
         .post(`${API}signup/`, {
+          id: "",
           username: username,
           email: email,
           password: password,
           name: name,
+          joinDate: "",
+          joinTime: "",
           profilePicture: "",
           bio: "",
           link: "",
