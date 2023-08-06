@@ -71,6 +71,15 @@ async def updateUser(user: UpdateUser):
     UserDB.updateUser(data)
 
 
+@app.get("/fetchUser/{id}")
+async def fetchUser(id):
+    response = UserDB.fetchUser(id)
+    if response:
+        del response["_id"]
+        return response
+    raise HTTPException(404, f"data not found")
+
+
 @app.post("/newThread", response_model=Thread)
 async def newThread(thread: Thread):
     thread.id = uniqueID()
