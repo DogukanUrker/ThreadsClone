@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class User(BaseModel):
     id: str
     username: str
@@ -15,7 +16,21 @@ class User(BaseModel):
     following: list
     private: bool
     active: bool
-    confirmed: bool 
+    confirmed: bool
+
+
+class UpdateUser(BaseModel):
+    id: str
+    username: str
+    email: str
+    password: str
+    name: str
+    profilePicture: str
+    bio: str
+    link: str
+    private: bool
+    active: bool
+
 
 class LoginItem(BaseModel):
     username: str
