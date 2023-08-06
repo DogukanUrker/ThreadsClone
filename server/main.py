@@ -2,10 +2,11 @@ from fastapi import FastAPI, HTTPException
 import jwt
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
-from models import LoginItem, User
+from models import LoginItem, User, Thread
 from passlib.hash import sha256_crypt
 from dependencies import *
 from database.user import UserDB
+from database.thread import ThreadDB
 
 app = FastAPI()
 
@@ -50,3 +51,8 @@ async def login(loginitem: LoginItem):
             case False:
                 raise HTTPException(404, f"user name cant be 'edit' ")
     raise HTTPException(404, f"user not found")
+
+
+@app.post("/newThread", response_model=Thread)
+async def newThread(thread: Thread):
+    ThreadDB.newThread(thread.dict())

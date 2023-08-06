@@ -17,3 +17,11 @@ class User(BaseModel):
 class LoginItem(BaseModel):
     username: str
     password: str
+
+
+class Thread(BaseModel):
+    author: str
+    thread: str
+    media: str
+    date: str
+    time: str
