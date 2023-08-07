@@ -2,7 +2,9 @@ from fastapi import FastAPI, HTTPException
 import jwt
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
-from models import LoginItem, User, Thread, UpdateUser
+from models.auth import LoginItem
+from models.user import User,UpdateUser
+from models.thread import Thread
 from passlib.hash import sha256_crypt
 from dependencies import *
 from database.user import UserDB

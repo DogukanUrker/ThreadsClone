@@ -30,20 +30,3 @@ class UpdateUser(BaseModel):
     link: str
     private: bool
     active: bool
-
-
-class LoginItem(BaseModel):
-    username: str
-    password: str
-
-
-class Thread(BaseModel):
-    id: str
-    author: str
-    thread: str
-    media: str
-    date: str
-    time: str
-    likes: list
-    repost: list
-    replies: list
