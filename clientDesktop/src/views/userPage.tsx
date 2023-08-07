@@ -3,12 +3,27 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API } from "../dependencies";
 export default function User() {
+  /* let { userName } = useParams(); */
   let { username } = useParams();
   const [data, setData] = useState([]);
   useEffect(() => {
     axios.get(`${API}fetchUser/${username}`).then((json) => setData(json.data));
   }, []);
-  console.log(data);
+  /* useEffect(() => {
+    axios
+      .get(`${API}fetchThreads/${userName}`)
+      .then((json) => setData(json.data));
+  }, []);
+  const renderThreads = () => {
+    return data.map((thread) => {
+      return (
+        <div>
+          <div>{thread.author}</div>
+          <div>{thread.thread}</div>
+        </div>
+      );
+    });
+  }; */
   return (
     <>
       <div
@@ -40,6 +55,7 @@ export default function User() {
             </a>
           </div>
         </div>
+        {/* <div>{renderThreads()}</div> */}
       </div>
     </>
   );
