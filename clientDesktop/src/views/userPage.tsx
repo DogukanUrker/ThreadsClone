@@ -23,10 +23,7 @@ export default function User() {
               <div className="font-semibold text-md m-0 ">{data.username}</div>
             </div>
             <div>
-              <img
-                src="https://avatars.githubusercontent.com/u/62756402?v=4"
-                className="w-24 rounded-full"
-              />
+              <img src={data.profilePicture} className="w-24 rounded-full" />
             </div>
           </div>
           <div className="font-semibold w-full text-left mt-2">{data.bio}</div>
