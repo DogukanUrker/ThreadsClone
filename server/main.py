@@ -71,9 +71,9 @@ async def updateUser(user: UpdateUser):
     UserDB.updateUser(data)
 
 
-@app.get("/fetchUser/{id}")
-async def fetchUser(id):
-    response = UserDB.fetchUser(id)
+@app.get("/fetchUser/{username}")
+async def fetchUser(username):
+    response = UserDB.fetchUser(username)
     if response:
         del response["_id"]
         return response
