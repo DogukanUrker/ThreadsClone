@@ -9,7 +9,7 @@ from passlib.hash import sha256_crypt
 from dependencies import *
 from database.user import UserDB
 from database.thread import ThreadDB
-from utils import uniqueID
+from utils import uniqueID,response
 
 app = FastAPI()
 
@@ -26,16 +26,13 @@ app.add_middleware(
 
 @app.post("/signup", response_model=User)
 async def signup(user: User):
-    print(user)
     if not UserDB.fetchUser(user.username):
         from datetime import datetime
-
         user.id = uniqueID()
         user.password = sha256_crypt.hash(user.password)
         user.joinDate = datetime.today().strftime("%d/%m/%Y")
         user.joinTime = datetime.today().strftime("%H:%M:%S")
         UserDB.addUser(user.dict())
-        print(user)
         return user
     raise HTTPException(400, "This user already exists.")
 
@@ -75,18 +72,12 @@ async def updateUser(user: UpdateUser):
 
 @app.get("/fetchUserByUsername/{username}")
 async def fetchUserByUsername(username):
-    response = UserDB.fetchUserByUsername(username)
-    if response:
-        del response["_id"]
-        return response
+    response(UserDB.fetchUserByUsername(username))
     raise HTTPException(404, f"USER NOT FOUND")
 
 @app.get("/fetchUserByID/{id}")
 async def fetchUserByID(id):
-    response = UserDB.fetchUserByID(id)
-    if response:
-        del response["_id"]
-        return response
+    response(UserDB.fetchUserByID(id))
     raise HTTPException(404, f"USER NOT FOUND")
 
 @app.post("/newThread", response_model=Thread)
@@ -96,16 +87,10 @@ async def newThread(thread: Thread):
 
 @app.get("/fetchThreadByID/{id}")
 async def fetchThreadByID(id):
-    response = ThreadDB.fetchThreadByID(id)
-    if response:
-        del response["_id"]
-        return response
+    response(ThreadDB.fetchThreadByID(id))
     raise HTTPException(404, f"THREAD NOT FOUND")
 
 @app.get("/fetchThreadByAuthor/{author}")
 async def fetchThreadByAuthor(author):
-    response = ThreadDB.fetchThreadByAuthor(author)
-    if response:
-        del response["_id"]
-        return response
+    response(ThreadDB.fetchThreadByAuthor(author))
     raise HTTPException(404, f"THREAD NOT FOUND")
