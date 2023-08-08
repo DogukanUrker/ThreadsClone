@@ -79,7 +79,7 @@ async def fetchUserByUsername(username):
     if response:
         del response["_id"]
         return response
-    raise HTTPException(404, f"data not found")
+    raise HTTPException(404, f"USER NOT FOUND")
 
 @app.get("/fetchUserByID/{id}")
 async def fetchUserByID(id):
@@ -87,9 +87,25 @@ async def fetchUserByID(id):
     if response:
         del response["_id"]
         return response
-    raise HTTPException(404, f"data not found")
+    raise HTTPException(404, f"USER NOT FOUND")
 
 @app.post("/newThread", response_model=Thread)
 async def newThread(thread: Thread):
     thread.id = uniqueID()
     ThreadDB.newThread(thread.dict())
+
+@app.get("/fetchThreadByID/{id}")
+async def fetchThreadByID(id):
+    response = ThreadDB.fetchThreadByID(id)
+    if response:
+        del response["_id"]
+        return response
+    raise HTTPException(404, f"THREAD NOT FOUND")
+
+@app.get("/fetchThreadByAuthor/{author}")
+async def fetchThreadByAuthor(author):
+    response = ThreadDB.fetchThreadByAuthor(author)
+    if response:
+        del response["_id"]
+        return response
+    raise HTTPException(404, f"THREAD NOT FOUND")
