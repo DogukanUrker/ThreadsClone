@@ -73,14 +73,21 @@ async def updateUser(user: UpdateUser):
     UserDB.updateUser(data)
 
 
-@app.get("/fetchUser/{username}")
-async def fetchUser(username):
-    response = UserDB.fetchUser(username)
+@app.get("/fetchUserByUsername/{username}")
+async def fetchUserByUsername(username):
+    response = UserDB.fetchUserByUsername(username)
     if response:
         del response["_id"]
         return response
     raise HTTPException(404, f"data not found")
 
+@app.get("/fetchUserByID/{id}")
+async def fetchUserByID(id):
+    response = UserDB.fetchUserByID(id)
+    if response:
+        del response["_id"]
+        return response
+    raise HTTPException(404, f"data not found")
 
 @app.post("/newThread", response_model=Thread)
 async def newThread(thread: Thread):

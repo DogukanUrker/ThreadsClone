@@ -23,5 +23,8 @@ class UserDB:
             },
         )
 
-    def fetchUser(username):
+    def fetchUserByUsername(username):
         return colUsers.find_one({"username": username})
+    
+    def fetchUserByID(id):
+        return colUsers.find_one({"id": id})
