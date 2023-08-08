@@ -9,7 +9,7 @@ from passlib.hash import sha256_crypt
 from dependencies import *
 from database.user import UserDB
 from database.thread import ThreadDB
-from helpers import uniqueID
+from utils import uniqueID
 
 app = FastAPI()
 
