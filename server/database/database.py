@@ -6,3 +6,4 @@ db = client.ThreadsClone
 
 colUsers = db.users
 colThread = db.threads
+colComment = db.comments
