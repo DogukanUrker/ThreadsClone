@@ -113,3 +113,13 @@ async def fetchCommentByThread(threadID):
 @app.get("/fetchCommentByAuthor/{authorID}")
 async def fetchCommentByAuthor(authorID):
     return response(CommentDB.fetchCommentByAuthor(authorID))
+
+
+@app.delete("/deleteThreadByID/{threadID}")
+async def deleteThreadByID(threadID):
+    return ThreadDB.deleteThreadByID(threadID)
+
+
+@app.delete("/deleteCommentByID/{CommentID}")
+async def deleteCommentByID(CommentID):
+    return CommentDB.deleteCommentByID(CommentID)

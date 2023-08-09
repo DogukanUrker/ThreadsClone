@@ -10,3 +10,6 @@ class CommentDB:
 
     def fetchCommentByAuthor(authorID):
         return colComment.find_one({"authorID": authorID})
+
+    def deleteCommentByID(commentID):
+        return colComment.delete_one({"id": commentID})
