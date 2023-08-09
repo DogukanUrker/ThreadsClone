@@ -3,13 +3,15 @@ import jwt
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from models.auth import LoginItem
-from models.user import User,UpdateUser
+from models.user import User, UpdateUser
 from models.thread import Thread
+from models.comment import Comment
 from passlib.hash import sha256_crypt
 from dependencies import *
 from database.user import UserDB
 from database.thread import ThreadDB
-from utils import uniqueID,response
+from database.comment import CommentDB
+from utils import uniqueID, response
 
 app = FastAPI()
 
@@ -28,6 +30,7 @@ app.add_middleware(
 async def signup(user: User):
     if not UserDB.fetchUser(user.username):
         from datetime import datetime
+
         user.id = uniqueID()
         user.password = sha256_crypt.hash(user.password)
         user.joinDate = datetime.today().strftime("%d/%m/%Y")
@@ -72,25 +75,41 @@ async def updateUser(user: UpdateUser):
 
 @app.get("/fetchUserByUsername/{username}")
 async def fetchUserByUsername(username):
-    response(UserDB.fetchUserByUsername(username))
-    raise HTTPException(404, f"USER NOT FOUND")
+    return response(UserDB.fetchUserByUsername(username))
+
 
 @app.get("/fetchUserByID/{id}")
 async def fetchUserByID(id):
-    response(UserDB.fetchUserByID(id))
-    raise HTTPException(404, f"USER NOT FOUND")
+    return response(UserDB.fetchUserByID(id))
+
 
 @app.post("/newThread", response_model=Thread)
 async def newThread(thread: Thread):
     thread.id = uniqueID()
     ThreadDB.newThread(thread.dict())
 
+
 @app.get("/fetchThreadByID/{id}")
 async def fetchThreadByID(id):
-    response(ThreadDB.fetchThreadByID(id))
-    raise HTTPException(404, f"THREAD NOT FOUND")
+    return response(ThreadDB.fetchThreadByID(id))
+
 
 @app.get("/fetchThreadByAuthor/{author}")
 async def fetchThreadByAuthor(author):
-    response(ThreadDB.fetchThreadByAuthor(author))
-    raise HTTPException(404, f"THREAD NOT FOUND")
+    return response(ThreadDB.fetchThreadByAuthor(author))
+
+
+@app.post("/postComment", response_model=Comment)
+async def postComment(comment: Comment):
+    comment.id = uniqueID()
+    CommentDB.postComment(comment.dict())
+
+
+@app.get("/fetchCommentByThread/{threadID}")
+async def fetchCommentByThread(threadID):
+    return response(CommentDB.fetchCommentByThread(threadID))
+
+
+@app.get("/fetchCommentByAuthor/{authorID}")
+async def fetchCommentByAuthor(authorID):
+    return response(CommentDB.fetchCommentByAuthor(authorID))
