@@ -10,4 +10,3 @@ class Thread(BaseModel):
     time: str
     likes: list
     repost: list
-    replies: list
