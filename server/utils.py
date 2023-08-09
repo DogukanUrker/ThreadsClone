@@ -1,4 +1,5 @@
 from uuid import uuid4
+from fastapi import HTTPException
 
 
 def uniqueID():
@@ -9,3 +10,5 @@ def response(response):
     if response:
         del response["_id"]
         return response
+    else:
+        raise HTTPException(404, f"DATA NOT FOUND")
