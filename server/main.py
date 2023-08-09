@@ -83,10 +83,10 @@ async def fetchUserByID(id):
     return response(UserDB.fetchUserByID(id))
 
 
-@app.post("/newThread", response_model=Thread)
-async def newThread(thread: Thread):
+@app.post("/postThread", response_model=Thread)
+async def postThread(thread: Thread):
     thread.id = uniqueID()
-    ThreadDB.newThread(thread.dict())
+    ThreadDB.postThread(thread.dict())
 
 
 @app.get("/fetchThreadByID/{id}")
