@@ -28,7 +28,7 @@ app.add_middleware(
 
 @app.post("/signup", response_model=User)
 async def signup(user: User):
-    if not UserDB.fetchUser(user.username):
+    if not UserDB.fetchUserByUsername(user.username):
         from datetime import datetime
 
         user.id = uniqueID()
@@ -43,7 +43,7 @@ async def signup(user: User):
 @app.post("/login")
 async def login(loginitem: LoginItem):
     data = jsonable_encoder(loginitem)
-    response = UserDB.fetchUser(data["username"])
+    response = UserDB.fetchUserByUsername(data["username"])
     if response:
         match data["username"] != "edit":
             case True:
@@ -58,7 +58,7 @@ async def login(loginitem: LoginItem):
                                 )
                                 return {
                                     "token": encodedJWT,
-                                    "username": data["username"],
+                                    "user": data["username"],
                                 }
                             case False:
                                 raise HTTPException(404, f"wrong password")
