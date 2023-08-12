@@ -4,6 +4,7 @@ import Profile from "./views/profile";
 import Signup from "./views/signup";
 import Login from "./views/login";
 import UserPage from "./views/userPage";
+import PostThread from "./views/postThread";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/postThread" element={<PostThread />} />
           <Route path="/user">
             <Route path=":username" element={<UserPage />} />
           </Route>
