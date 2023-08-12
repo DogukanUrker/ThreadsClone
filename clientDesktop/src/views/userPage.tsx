@@ -7,7 +7,9 @@ export default function User() {
   let { username } = useParams();
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get(`${API}fetchUser/${username}`).then((json) => setData(json.data));
+    axios
+      .get(`${API}fetchUserByUsername/${username}`)
+      .then((json) => setData(json.data));
   }, []);
   /* useEffect(() => {
     axios
