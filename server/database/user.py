@@ -12,13 +12,10 @@ class UserDB:
                 "$set": {
                     "username": data["username"],
                     "email": data["email"],
-                    "password": data["password"],
                     "name": data["name"],
                     "profilePicture": data["profilePicture"],
                     "bio": data["bio"],
                     "link": data["link"],
-                    "private": data["private"],
-                    "active": data["active"],
                 }
             },
         )
