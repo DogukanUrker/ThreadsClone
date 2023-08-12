@@ -123,3 +123,13 @@ async def deleteThreadByID(threadID):
 @app.delete("/deleteCommentByID/{CommentID}")
 async def deleteCommentByID(CommentID):
     return CommentDB.deleteCommentByID(CommentID)
+
+
+@app.put("/setPublic/{userID}")
+async def setPublic(userID):
+    return UserDB.setPublicByID(userID)
+
+
+@app.put("/setPrivate/{userID}")
+async def setPrivate(userID):
+    return UserDB.setPrivateByID(userID)

@@ -28,3 +28,23 @@ class UserDB:
 
     def fetchUserByID(id):
         return colUsers.find_one({"id": id})
+
+    def setPrivateByID(userID):
+        colUsers.update_one(
+            {"id": userID},
+            {
+                "$set": {
+                    "private": True,
+                }
+            },
+        )
+
+    def setPublicByID(userID):
+        colUsers.update_one(
+            {"id": userID},
+            {
+                "$set": {
+                    "private": False,
+                }
+            },
+        )
