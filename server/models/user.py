@@ -23,10 +23,7 @@ class UpdateUser(BaseModel):
     id: str
     username: str
     email: str
-    password: str
     name: str
     profilePicture: str
     bio: str
     link: str
-    private: bool
-    active: bool
