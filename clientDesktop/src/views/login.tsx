@@ -5,7 +5,7 @@ import axios from "axios";
 import { API } from "../dependencies";
 export default function Login() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const login = () => {
@@ -42,7 +42,7 @@ export default function Login() {
               <input
                 type="text"
                 autoComplete="new-password"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setUserName(e.target.value)}
                 placeholder="username"
                 className="block mx-auto my-2 border-2 text-center border-solid border-zinc-400 p-1 rounded-md transition duration-200 outline-zinc-700 bg-zinc-800/50 text-white focus:outline-none focus:ring focus:ring-zinc-400"
               />
