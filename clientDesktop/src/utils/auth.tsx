@@ -13,7 +13,7 @@ export const fetchToken = (token) => {
 };
 
 export const fetchUsername = (user) => {
-  return localStorage.getItem("User");
+  return localStorage.getItem("User").replace(/\"/gi, "");
 };
 
 export function RequireToken({ children }) {
