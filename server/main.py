@@ -11,7 +11,7 @@ from dependencies import *
 from database.user import UserDB
 from database.thread import ThreadDB
 from database.comment import CommentDB
-from utils import uniqueID, response
+from utils import uniqueID, response, isUserUnique
 
 app = FastAPI()
 
@@ -28,7 +28,7 @@ app.add_middleware(
 
 @app.post("/signup", response_model=User)
 async def signup(user: User):
-    if not UserDB.fetchUserByUsername(user.username):
+    if isUserUnique(user.username):
         from datetime import datetime
 
         user.id = uniqueID()
@@ -87,6 +87,9 @@ async def fetchUserByID(id):
 async def postThread(thread: Thread):
     thread.id = uniqueID()
     ThreadDB.postThread(thread.dict())
+    return {
+        "threadID": thread.id,
+    }
 
 
 @app.get("/fetchThreadByID/{id}")
