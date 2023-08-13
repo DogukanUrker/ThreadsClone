@@ -69,8 +69,11 @@ async def login(loginitem: LoginItem):
 
 @app.put("/updateUser")
 async def updateUser(user: UpdateUser):
-    data = jsonable_encoder(user)
-    UserDB.updateUser(data)
+    if isUserUnique(user.username):
+        data = jsonable_encoder(user)
+        UserDB.updateUser(data)
+        raise HTTPException(200, "User settings updated.")
+    raise HTTPException(400, "This username is already taken.")
 
 
 @app.get("/fetchUserByUsername/{username}")
