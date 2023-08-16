@@ -11,5 +11,15 @@ class ThreadDB:
     def fetchThreadByID(id):
         return colThread.find_one({"id": id})
 
-    def deleteThreadByID(ThreadID):
-        return colThread.delete_one({"id": ThreadID})
+    def deleteThreadByID(threadID):
+        return colThread.delete_one({"id": threadID})
+
+    def likeThread(threadID, userID):
+        colThread.update_many(
+            {"id": threadID},
+            {
+                "$push": {
+                    "likes": userID,
+                }
+            },
+        )

@@ -28,3 +28,8 @@ async def fetchThreadByAuthor(author):
 @thread.delete("/deleteThreadByID/{threadID}")
 async def deleteThreadByID(threadID):
     return ThreadDB.deleteThreadByID(threadID)
+
+
+@thread.post("/likeThread/{threadID}/{userID}")
+async def likeThread(threadID, userID):
+    return ThreadDB.likeThread(threadID, userID)
