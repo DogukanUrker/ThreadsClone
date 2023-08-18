@@ -23,3 +23,6 @@ class ThreadDB:
                 }
             },
         )
+
+    def getLikeCount(threadID):
+        return colThread.find_one({"id": threadID})

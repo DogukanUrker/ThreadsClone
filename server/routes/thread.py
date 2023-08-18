@@ -33,3 +33,8 @@ async def deleteThreadByID(threadID):
 @thread.post("/likeThread/{threadID}/{userID}")
 async def likeThread(threadID, userID):
     return ThreadDB.likeThread(threadID, userID)
+
+
+@thread.get("/getLikeCount/{threadID}")
+async def getLikeCount(threadID):
+    return len(list(ThreadDB.getLikeCount(threadID).values())[7])
