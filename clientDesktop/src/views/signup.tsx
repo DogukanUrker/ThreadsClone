@@ -9,11 +9,12 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const addUser = () => {
     if (username == "" && email == "" && password == "" && name == "") {
       return;
-    } else {
+    } else if (password == confirmPassword) {
       axios
         .post(`${API}signup/`, {
           id: "",
@@ -76,6 +77,13 @@ export default function Signup() {
                 className="block mx-auto text-center my-2 border-2 border-solid border-zinc-400 bg-transparent text-white p-1 rounded-md transition duration-200 outline-zinc-700 focus:outline-none focus:ring focus:ring-zinc-400"
                 onChange={(event) => setPassword(event.target.value)}
                 placeholder="password"
+              />
+              <input
+                type="password"
+                autoComplete="new-password"
+                className="block mx-auto text-center my-2 border-2 border-solid border-zinc-400 bg-transparent text-white p-1 rounded-md transition duration-200 outline-zinc-700 focus:outline-none focus:ring focus:ring-zinc-400"
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                placeholder="confirm password"
               />
               <button
                 className="block m-auto my-2 bg-zinc-500 p-2 text-base font-medium hover:bg-zinc-600 transition duration-200 rounded-md text-slate-50"
