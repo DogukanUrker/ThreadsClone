@@ -13,7 +13,7 @@ export default function PostThread() {
       return;
     } else {
       axios
-        .post(`${API}postThread/`, {
+        .post(`${API}postThread`, {
           id: "",
           author: fetchUsername(),
           thread: thread,
@@ -29,7 +29,6 @@ export default function PostThread() {
         })
         .catch(function(error) {
           console.log(error, "error");
-          navigate(`/user/${fetchUsername()}`);
         });
     }
   };
