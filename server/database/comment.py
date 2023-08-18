@@ -13,3 +13,16 @@ class CommentDB:
 
     def deleteCommentByID(commentID):
         return colComment.delete_one({"id": commentID})
+
+    def likeComment(commentID, userID):
+        colComment.update_many(
+            {"id": commentID},
+            {
+                "$push": {
+                    "likes": userID,
+                }
+            },
+        )
+
+    def getLikeCount(commentID):
+        return len(list(colComment.find_one({"id": commentID}).values())[6])

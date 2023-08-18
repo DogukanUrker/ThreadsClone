@@ -25,3 +25,13 @@ async def fetchCommentByAuthor(authorID):
 @comment.delete("/deleteCommentByID/{CommentID}")
 async def deleteCommentByID(CommentID):
     return CommentDB.deleteCommentByID(CommentID)
+
+
+@comment.post("/likeComment/{commentID}/{userID}")
+async def likeComment(commentID, userID):
+    return CommentDB.likeComment(commentID, userID)
+
+
+@comment.get("/getCommentLikeCount/{commentID}")
+async def getCommentLikeCount(commentID):
+    return CommentDB.getLikeCount(commentID)
