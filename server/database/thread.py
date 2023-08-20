@@ -14,6 +14,13 @@ class ThreadDB:
     def deleteThreadByID(threadID):
         return colThread.delete_one({"id": threadID})
 
+    def fetchThreads():
+        threads = []
+        for thread in colThread.find():
+            del thread["_id"]
+            threads.append(thread)
+        return threads
+
     def likeThread(threadID, userID):
         colThread.update_many(
             {"id": threadID},

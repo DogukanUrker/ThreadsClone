@@ -38,3 +38,8 @@ async def likeThread(threadID, userID):
 @thread.get("/getThreadLikeCount/{threadID}")
 async def getThreadLikeCount(threadID):
     return ThreadDB.getLikeCount(threadID)
+
+
+@thread.get("/fetchThreads")
+async def fetchThreads():
+    return ThreadDB.fetchThreads()
