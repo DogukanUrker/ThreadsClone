@@ -8,7 +8,11 @@ thread = APIRouter()
 
 @thread.post("/postThread", response_model=Thread)
 async def postThread(thread: Thread):
+    from datetime import datetime
+
     thread.id = uniqueID()
+    thread.date = datetime.today().strftime("%d/%m/%Y")
+    thread.time = datetime.today().strftime("%H:%M:%S")
     ThreadDB.postThread(thread.dict())
     return {
         "threadID": thread.id,
