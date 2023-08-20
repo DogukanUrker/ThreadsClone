@@ -19,7 +19,7 @@ class ThreadDB:
         for thread in colThread.find():
             del thread["_id"]
             threads.append(thread)
-        return threads
+        return threads[::-1]
 
     def likeThread(threadID, userID):
         colThread.update_many(
