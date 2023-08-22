@@ -11,6 +11,23 @@ export function setPrivate(userID: string) {
   window.location.reload();
 }
 
+export function getNumberOfDays(date) {
+  const date1 = new Date(date);
+  const date2 = new Date();
+  const oneDay = 1000 * 60 * 60 * 24;
+  const diffInTime = date2.getTime() - date1.getTime();
+  const diffInDays = Math.round(diffInTime / oneDay);
+  if (diffInDays > 31) {
+    const diffInMonths = Math.round(diffInDays / 30);
+    return `${diffInMonths}MONTHS`;
+  } else if (diffInDays > 7 && diffInDays < 31) {
+    const diffInWeeks = Math.round(diffInDays / 7);
+    return `${diffInWeeks}WEEKS`;
+  } else {
+    return `${diffInDays}DAYS`;
+  }
+}
+
 export function saveChanges(
   userID: string,
   username: string,
